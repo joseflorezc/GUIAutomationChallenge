@@ -49,8 +49,11 @@ allure-results/
 
 .idea/
 
+target
+
 # Exe
 chromedriver.exe
+
 
 
 
