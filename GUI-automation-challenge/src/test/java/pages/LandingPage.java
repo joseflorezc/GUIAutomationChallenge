@@ -14,39 +14,41 @@ public class LandingPage extends BasePage{
 
     @FindBy(xpath = "/html/body/div[1]/header/div[1]/div/div[2]/ul/li[3]/a")
     private WebElement login;
-    private By searchBar = By.id("searchInput");
-    private By suggestedItems = By.cssSelector(".suggestion-dropdown >a");
+
+    @FindBy(css = "#inner_search_form > input[type=submit]")
+    private WebElement searchButton;
+
+    @FindBy(id = "inner_search_v4")
+    private WebElement searchBar;
+
+
+//    private By searchBar = By.id("inner_search_v4");
 
 
     public LandingPage(WebDriver driver){
         super(driver);
     }
 
-    public void waitForSuggestedItems(){
-        //explicit
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(suggestedItems, 3));
-        //implicit
-        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-    }
 
-    public void login(){
+    public LoginPage login(){
         login.click();
+        return new LoginPage(driver);
     }
 
     public void search (String query){
 
+        searchBar.sendKeys(query);
 
-        driver.findElement(searchBar).sendKeys(query);
-        waitForSuggestedItems();
     }
 
-    public ArticlePage clickFirstArticle(){
-        List<WebElement> suggestedItemsList = driver.findElements(suggestedItems);
-        suggestedItemsList.get(0).click();
+    public ResultPage sendSearchRequest(){
 
-        return new ArticlePage(driver);
+        searchButton.click();
+
+        return new ResultPage(driver);
     }
+
+
 
 }
