@@ -30,8 +30,7 @@ public class Hooks {
 
         searchQuery = System.getenv("SearchTheMovieDB");
         searchResultTitle = System.getenv("SearchTheMovieDB");
-        System.out.println(searchQuery);
-        System.out.println(searchResultTitle);
+
 
         driver = new ChromeDriver();
         driver.navigate().to(domain);
@@ -43,8 +42,7 @@ public class Hooks {
 
     @AfterMethod
     public void exit(){
-       //driver.quit();
-
+       driver.quit();
     }
 
 

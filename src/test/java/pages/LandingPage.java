@@ -1,5 +1,6 @@
 package pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.util.List;
+//import java.util.concurrent.TimeUnit;
 
 public class LandingPage extends BasePage{
 
@@ -21,12 +24,15 @@ public class LandingPage extends BasePage{
     @FindBy(id = "inner_search_v4")
     private WebElement searchBar;
 
+    By movieOptionsMenu = By.cssSelector(" li.k-item.k-menu-item.k-state-default.k-first.k-state-border-down > div > ul > li");
 
-//    private By searchBar = By.id("inner_search_v4");
+
+
 
 
     public LandingPage(WebDriver driver){
         super(driver);
+        header = new HeaderPage(driver);
     }
 
 
@@ -47,6 +53,28 @@ public class LandingPage extends BasePage{
         searchButton.click();
 
         return new ResultPage(driver);
+    }
+
+    public void openingHeaderMovieMenu(){
+
+        header.openMoviesMenu();
+    }
+
+    public ResultPage openingTopRatedMovies(){
+
+        header.openTopRatedMovies();
+        return new ResultPage(driver);
+    }
+
+    public void waitExplicitNumberOfElementsMoreThanOne(){
+
+        List<WebElement> listMovieOptions = driver.findElements(movieOptionsMenu);
+        //explicit
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(movieOptionsMenu, 1));
+        //implicit
+        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
     }
 
 

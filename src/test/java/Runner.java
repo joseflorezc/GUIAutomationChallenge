@@ -4,11 +4,9 @@ import pages.AccountPage;
 import pages.LandingPage;
 import pages.LoginPage;
 import pages.ResultPage;
-import utils.steps.CommonSteps;
 import utils.steps.Hooks;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsStringIgnoringCase;
 import static org.hamcrest.Matchers.equalTo;
 
 public class Runner extends Hooks {
@@ -54,10 +52,21 @@ public class Runner extends Hooks {
         landingPage.search(searchQuery);
         ResultPage resultPage = landingPage.sendSearchRequest();
 
-        assertThat("the first Movie displayed in the search results was not the expected one", resultPage.getTitleOfFirstResult()  , equalTo(searchResultTitle));
-
+        assertThat("the first Movie displayed in the search results was not the expected one", resultPage.getTitleOfFirstResultMovies()  , equalTo(searchResultTitle));
     }
 
+    @Test
+    public void verifyMovieGenre(){
+        LandingPage landingPage = new LandingPage(driver);
 
+        System.out.println("click headerMovie");
+        landingPage.openingHeaderMovieMenu();
+        System.out.println("openningtopRatedMovies headerMovie");
+        landingPage.waitExplicitNumberOfElementsMoreThanOne();
+        ResultPage resultPage = landingPage.openingTopRatedMovies();
+
+        resultPage.openFiltersMenu();
+
+    }
 
 }
