@@ -1,6 +1,10 @@
 package pages;
 
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,11 +13,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-import java.util.List;
-//import java.util.concurrent.TimeUnit;
+
 
 public class LandingPage extends BasePage{
 
+    private final static Logger LOGGER = getLogger(LandingPage.class.getName());
 
     @FindBy(xpath = "/html/body/div[1]/header/div[1]/div/div[2]/ul/li[3]/a")
     private WebElement login;
@@ -33,49 +37,69 @@ public class LandingPage extends BasePage{
     public LandingPage(WebDriver driver){
         super(driver);
         header = new HeaderPage(driver);
+        Configurator.setLevel(LOGGER.getName(), Level.ALL);
+
     }
 
 
 
     public LoginPage login(){
+        LOGGER.debug("Clicking on the login Button");
         login.click();
+        LOGGER.debug("The click on the login button was succesfull");
+        LOGGER.info("Going to enter to Login Page");
         return new LoginPage(driver);
     }
 
     public void search (String query){
 
+        LOGGER.debug("Filling search bar with query");
         searchBar.sendKeys(query);
+        LOGGER.debug("Finished filling search bar with query");
 
     }
 
     public ResultPage sendSearchRequest(){
 
+        LOGGER.debug("Sending query request by clicking on the search button");
         searchButton.click();
+        LOGGER.debug("finished clicking the search button");
 
+        LOGGER.info("Going to Enter to ResultPage");
         return new ResultPage(driver);
     }
 
     public void openingHeaderMovieMenu(){
 
+        LOGGER.debug("Opening Movies Menu of Header");
         header.openMoviesMenu();
+        waitExplicitNumberOfElementsMoreThanOne();
+        LOGGER.debug("Finished Opening Movies Menu of Header");
+
     }
 
     public ResultPage openingTopRatedMovies(){
-
+        LOGGER.debug("Clicking on the top rated option of Movies");
         header.openTopRatedMovies();
+        LOGGER.debug("Finished clicking on the top rated option of Movies");
+
+        LOGGER.info("Going to Enter to ResultPage for Top Rated Movies");
         return new ResultPage(driver);
     }
 
     public void waitExplicitNumberOfElementsMoreThanOne(){
 
-        List<WebElement> listMovieOptions = driver.findElements(movieOptionsMenu);
+        LOGGER.debug("Waiting for the options of movie navbar to appear");
+//        List<WebElement> listMovieOptions = driver.findElements(movieOptionsMenu);
         //explicit
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(movieOptionsMenu, 1));
-        //implicit
-        //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        LOGGER.debug("finished waiting for the options of movie navbar to appear");
+
 
     }
+
+
 
 
 

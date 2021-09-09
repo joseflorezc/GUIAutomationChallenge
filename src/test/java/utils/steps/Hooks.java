@@ -8,18 +8,34 @@ import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 public class Hooks {
 
-    protected WebDriver driver;
+
+
+    protected String searchQuery;
+    protected String searchResultTitle;
+    protected String actionGenreText;
+    protected String nameOfMovieOfActorTimeLine;
+
+
     protected String realUsername;
     protected String realPassword;
     protected String fakePassword;
+
+    protected WebDriver driver;
+
     protected String domain;
-    protected String searchQuery;
-    protected String searchResultTitle;
 
     @BeforeMethod
     public void setup() throws IOException {
+
+        searchQuery = System.getenv("SearchTheMovieDB");
+        searchResultTitle = System.getenv("SearchTheMovieDB");
+
+        actionGenreText = System.getenv("ActionTextTheMovieDB");
+        nameOfMovieOfActorTimeLine = System.getenv("NameOfMovieOfActorTimeLineTheMovieDB");
 
         realUsername = System.getenv("UsernameTheMovieDB");
         realPassword = System.getenv("PasswordTheMovieDB");
@@ -28,24 +44,16 @@ public class Hooks {
 
         domain = System.getenv("DomainTheMovieDB");
 
-        searchQuery = System.getenv("SearchTheMovieDB");
-        searchResultTitle = System.getenv("SearchTheMovieDB");
-
-
         driver = new ChromeDriver();
         driver.navigate().to(domain);
-        //Es necesario establecer el tamanio, para que no se rompa el test,
-        // ya que con paginas responsive los componentes pueden cambiar completamente
         driver.manage().window().maximize();
 
     }
 
     @AfterMethod
-    public void exit(){
-       driver.quit();
+    public void exit() {
+        driver.quit();
     }
-
-
 
 
 }
