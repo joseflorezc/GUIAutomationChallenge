@@ -8,13 +8,12 @@ import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class Hooks {
 
 
 
-    protected String searchQuery;
+    protected static String searchQuery;
     protected String searchResultTitle;
     protected String actionGenreText;
     protected String nameOfMovieOfActorTimeLine;
@@ -27,6 +26,8 @@ public class Hooks {
     protected WebDriver driver;
 
     protected String domain;
+
+
 
     @BeforeMethod
     public void setup() throws IOException {

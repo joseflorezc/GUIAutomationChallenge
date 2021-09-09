@@ -93,7 +93,6 @@ public class ResultPage extends BasePage {
     }
 
     public void sendSortByPreferences() {
-        LOGGER.debug("Scrolling down the results page");
         scrollDownResultPage();
         LOGGER.debug("Sending the request to update media items depending on filters");
         searchButtonForFilter.click();
@@ -102,6 +101,7 @@ public class ResultPage extends BasePage {
     }
 
     private void scrollDownResultPage(){
+        LOGGER.debug("Scrolling down the page");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1600)", "");
     }
@@ -158,10 +158,12 @@ public class ResultPage extends BasePage {
 
         Boolean[] correctOrder = new Boolean[3];
         String[] datesOfMovies = extractingDatesofFirstfourSortedMovies();
+        LOGGER.debug("Start comparing all dates and saving on Array");
         for (int currentMovie = 0; currentMovie < 3; currentMovie++) {
             correctOrder[currentMovie] = CommonSteps.compareAscendingOrderOfDates(datesOfMovies[currentMovie], datesOfMovies[currentMovie+1]);
         }
 
+        LOGGER.debug("Finished comparing all dates and now are save on an Array");
 
         return Arrays.asList(correctOrder).stream().allMatch(val -> val == true);
     }
@@ -175,6 +177,8 @@ public class ResultPage extends BasePage {
             WebElement currentDate = listResults.get(currentMovie).findElement(By.cssSelector("#page_1.page_wrapper > div > div.content > p"));
             datesOfMovies[currentMovie] = currentDate.getText();
         }
+
+        LOGGER.debug("Finished getting the list of movies in the results ");
         return datesOfMovies;
     }
 

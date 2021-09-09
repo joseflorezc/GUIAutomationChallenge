@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".carton > a  > .background_color > span")
     private WebElement errorStatusWebEle;
 
-    private By errorStatusCardBy = By.xpath("//*[@id=\"main\"]/section/div/div/div/div");
+    private By errorStatusCardBy = By.cssSelector("h2.background_color.red");
 
     private By errorMessagesBy = By.cssSelector(".carton > .content > ul > li");
 
@@ -41,13 +41,16 @@ public class LoginPage extends BasePage {
 
 
     public void fillUserName(String username) {
-        LOGGER.debug("");
+        LOGGER.debug("Start filling username TextBox");
         usernameWebEle.sendKeys(username);
+        LOGGER.debug("Finish filling username TextBox");
 
     }
 
     public void fillPassword(String password) {
+        LOGGER.debug("Filling password TextBox");
         passwordWebEle.sendKeys(password);
+        LOGGER.debug("Finish filling password TextBox");
     }
 
     public AccountPage loggingIn(){
@@ -80,13 +83,12 @@ public class LoginPage extends BasePage {
 
     public String firstErrorMessage (){
         String [] containerMessages = messagesInError();
-        System.out.println(containerMessages[0]);
+
         return containerMessages[0];
     }
 
     public String secondErrorMessage (){
         String [] containerMessages = messagesInError();
-        System.out.println("second message"+containerMessages[1]);
         return containerMessages[1];
     }
 

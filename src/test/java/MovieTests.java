@@ -1,4 +1,5 @@
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
@@ -12,7 +13,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class MovieTests extends Hooks {
 
 
-    @Test(description = "The ")
+    @Test(description = "Search movie scenario with a query as input")
+    @Description("Search movie scenario with a query as input")
     public void searchingMovie() {
         LandingPage landingPage = new LandingPage(driver);
 
@@ -22,7 +24,8 @@ public class MovieTests extends Hooks {
         assertThat("the first Movie displayed in the search results was not the expected one", resultPage.getTitleOfFirstResultMovies(), equalTo(searchResultTitle));
     }
 
-    @Test
+    @Test(description = "Filter Movie by action genre and verify in movies")
+    @Description("Filter Movie by action genre and verify in movies")
     public void verifyMovieGenre() {
         LandingPage landingPage = new LandingPage(driver);
         landingPage.openingHeaderMovieMenu();
@@ -38,7 +41,8 @@ public class MovieTests extends Hooks {
 
     }
 
-    @Test
+    @Test(description = "Validate top billed person has movie in time line")
+    @Description("Validate top billed person has movie in time line")
     public void validateActingTimeLine() {
 
         LandingPage landingPage = new LandingPage(driver);
@@ -54,7 +58,8 @@ public class MovieTests extends Hooks {
 
     }
 
-    @Test
+    @Test(description = "Validate the order of movies when sorted")
+    @Description("Validate the order of movies when sorted by date on ascending order")
     public void validatingSortByDatesOnAscendingOrder() throws ParseException {
 
         LandingPage landingPage = new LandingPage(driver);

@@ -19,8 +19,6 @@ public class LandingPage extends BasePage{
 
     private final static Logger LOGGER = getLogger(LandingPage.class.getName());
 
-    @FindBy(xpath = "/html/body/div[1]/header/div[1]/div/div[2]/ul/li[3]/a")
-    private WebElement login;
 
     @FindBy(css = "#inner_search_form > input[type=submit]")
     private WebElement searchButton;
@@ -45,7 +43,7 @@ public class LandingPage extends BasePage{
 
     public LoginPage login(){
         LOGGER.debug("Clicking on the login Button");
-        login.click();
+        header.openLoginMenu();
         LOGGER.debug("The click on the login button was succesfull");
         LOGGER.info("Going to enter to Login Page");
         return new LoginPage(driver);

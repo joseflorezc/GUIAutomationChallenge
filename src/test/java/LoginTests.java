@@ -1,4 +1,5 @@
 
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.steps.Hooks;
@@ -10,7 +11,8 @@ import static org.hamcrest.Matchers.containsString;
 public class LoginTests extends Hooks {
 
 
-    @Test
+    @Test(description = "Successful login scenario with username and password")
+    @Description("Successful login scenario with username and password")
     public void successfulLogin() {
 
         LandingPage landingPage = new LandingPage(driver);
@@ -25,7 +27,8 @@ public class LoginTests extends Hooks {
 
     }
 
-    @Test
+    @Test(description = "Invalid login scenario with correct user and wrong password")
+    @Description("Invalid login scenario with correct user and wrong password")
     public void failingLoggingIn(){
 
 
@@ -41,7 +44,6 @@ public class LoginTests extends Hooks {
         assertThat("the error status text was not displayed or was incorrect during the login process", loginPage.getErrorStatusText()  , containsString("There was a problem"));
         assertThat("the error status first message was not displayed or was incorrect during the login process", loginPage.firstErrorMessage()  , containsString("We couldn't validate your information. Want to try again?"));
         assertThat("the error status second message was not displayed or was incorrect during the login process", loginPage.secondErrorMessage()  , containsString("remaining login attempts."));
-
 
     }
 

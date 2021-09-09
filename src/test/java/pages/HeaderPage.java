@@ -2,11 +2,13 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class HeaderPage extends BasePage{
 
+
+    @FindBy(css = "ul.primary > li:nth-child(3) > a")
+    private WebElement login;
 
     @FindBy(css = "a[href='/movie/top-rated']")
     private WebElement topRatedMovies;
@@ -22,12 +24,16 @@ public class HeaderPage extends BasePage{
     public void openMoviesMenu (){
 
         moviesNavButton.click();
-//        Actions act = new Actions(driver);
-//        act.moveToElement(moviesNavButton);
     }
 
     public void openTopRatedMovies(){
         topRatedMovies.click();
     }
+
+    public void openLoginMenu(){
+        login.click();
+    }
+
+
 
 }
