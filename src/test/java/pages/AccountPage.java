@@ -1,6 +1,8 @@
 package pages;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
+
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -17,7 +19,6 @@ public class AccountPage extends BasePage {
     @FindBy(css = "div.block.header.gradient.green > div.inner_content  > div.content > div > div.about > div:nth-child(1) > h2 > a")
     private WebElement profileUserName;
 
-
     public AccountPage(WebDriver driver) {
         super(driver);
 
@@ -25,6 +26,7 @@ public class AccountPage extends BasePage {
     }
 
 
+    @Step("Getting profile user name")
     public String getProfileUserName (){
         LOGGER.debug("Getting profile user name");
         return profileUserName.getText();

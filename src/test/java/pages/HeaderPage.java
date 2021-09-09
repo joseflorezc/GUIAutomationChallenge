@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,15 +22,18 @@ public class HeaderPage extends BasePage{
         super(driver);
     }
 
+    @Step("Open Movies Menu in navbar")
     public void openMoviesMenu (){
 
         moviesNavButton.click();
     }
 
+    @Step("Open top rated movies")
     public void openTopRatedMovies(){
         topRatedMovies.click();
     }
 
+    @Step("Open login menu")
     public void openLoginMenu(){
         login.click();
     }

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -64,12 +65,13 @@ public class ResultPage extends BasePage {
 
     }
 
-
+    @Step("Returning the text of the first movie after searching")
     public String getTitleOfFirstResultMovies() {
         LOGGER.debug("Returning the text of the first movie after searching");
         return firstItemResult.getText();
     }
 
+    @Step("Clicking to open the filters menu")
     public void openFiltersMenu() {
         LOGGER.debug("Clicking to open the filters menu");
         filterButton.click();
@@ -77,14 +79,15 @@ public class ResultPage extends BasePage {
         LOGGER.debug("Finished clicking to open the filters menu");
     }
 
+    @Step("Clicking on the action filter to turn it on")
     public void setActionFilterOn() {
         LOGGER.debug("Clicking on the action filter to turn it on");
         actionButton.click();
         LOGGER.debug("Finished clicking on the action filter");
     }
 
+    @Step("Sending the request to update media items depending on filters")
     public void sendFilterPreferences() {
-        LOGGER.debug("Scrolling down the results page");
         scrollDownResultPage();
         LOGGER.debug("Sending the request to update media items depending on filters");
         searchButtonForFilter.click();
@@ -92,6 +95,7 @@ public class ResultPage extends BasePage {
         LOGGER.debug("Finished sending the request to update media items depending on filters");
     }
 
+    @Step("Sending the request to update media items depending on filters")
     public void sendSortByPreferences() {
         scrollDownResultPage();
         LOGGER.debug("Sending the request to update media items depending on filters");
@@ -100,13 +104,14 @@ public class ResultPage extends BasePage {
         LOGGER.debug("Finished sending the request to update media items depending on filters");
     }
 
+    @Step("Scrolling down the page")
     private void scrollDownResultPage(){
         LOGGER.debug("Scrolling down the page");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1600)", "");
     }
 
-
+    @Step("Clicking on the movie item selected from the results")
     public MediaDetailPage detailMediaResult() {
 
         LOGGER.debug("Getting the movie that is going to be tested");
@@ -119,6 +124,7 @@ public class ResultPage extends BasePage {
         return new MediaDetailPage(driver);
     }
 
+    @Step("Selecting a movie from the results")
     private WebElement oneMovieOfResults() {
 
         LOGGER.debug("Going to generate a random number to select the movie to test");
@@ -132,6 +138,7 @@ public class ResultPage extends BasePage {
         return listResults.get(elementPicked);
     }
 
+    @Step("Clicking on the fourth movie")
     public MediaDetailPage detailOfFourthMovieOfResults() {
 
         LOGGER.debug("Clicking on the fourth movie");
@@ -141,6 +148,7 @@ public class ResultPage extends BasePage {
         return new MediaDetailPage(driver);
     }
 
+    @Step("Opening the filters menu")
     public void openSortingMenu() {
         LOGGER.debug("Clicking to open the filters menu");
         sortByButton.click();
@@ -148,12 +156,14 @@ public class ResultPage extends BasePage {
         LOGGER.debug("Finished clicking to open the filters menu");
     }
 
+    @Step("Selecting the option release date ascending")
     public void selectSortingByReleaseDateAscending() {
         LOGGER.debug("Clicking on the release date ascending to select it");
         sortByReleaseDateAscendingOption.click();
         LOGGER.debug("Finished clicking on the release date ascending to select it");
     }
 
+    @Step("Start comparing all dates and saving on Array")
     public Boolean comparingDatesOfMovies() throws ParseException {
 
         Boolean[] correctOrder = new Boolean[3];
@@ -168,6 +178,7 @@ public class ResultPage extends BasePage {
         return Arrays.asList(correctOrder).stream().allMatch(val -> val == true);
     }
 
+    @Step("Getting the Dates of a list of movies in the results ")
     private String[] extractingDatesofFirstfourSortedMovies(){
         String [] datesOfMovies = new String[4];
         LOGGER.debug("Getting the list of movies in the results ");
@@ -183,7 +194,7 @@ public class ResultPage extends BasePage {
     }
 
 
-
+    @Step("Waiting until genre options appear")
     private void waitUntilGenresAppear() {
         LOGGER.debug("Start waiting until genre options appear");
         WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -191,6 +202,7 @@ public class ResultPage extends BasePage {
         LOGGER.debug("Finished waiting until genre options appear");
     }
 
+    @Step("Waiting until the last action movie loads")
     private void waitUntilLastActionMovieAppears(){
         //explicit
         LOGGER.debug("Start waiting until the last action movie loads");
@@ -200,6 +212,7 @@ public class ResultPage extends BasePage {
 
     }
 
+    @Step("Waiting until sort by list appear")
     private void waitUntilSortByListAppear() {
         LOGGER.debug("Start waiting until sort by list appear");
         WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -207,6 +220,7 @@ public class ResultPage extends BasePage {
         LOGGER.debug("Finished waiting until sort by list appear");
     }
 
+    @Step("Waiting until the last sorted movie loads")
     private void waitUntilLastSortedByDateAscendingMovieAppears(){
         //explicit
         LOGGER.debug("Start waiting until the last sorted movie loads");

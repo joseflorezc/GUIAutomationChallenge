@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="The Movie DB UI">
+<suite name="The Movie DB UI" parallel="classes" thread-count="2">
     <test name="Tests Movie DB">
         <classes>
             <class name="LoginTests"/>

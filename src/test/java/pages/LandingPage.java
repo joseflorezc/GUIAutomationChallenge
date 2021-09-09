@@ -2,6 +2,8 @@ package pages;
 
 
 import static org.apache.logging.log4j.LogManager.getLogger;
+
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -41,6 +43,7 @@ public class LandingPage extends BasePage{
 
 
 
+    @Step("Clicking on the login Button")
     public LoginPage login(){
         LOGGER.debug("Clicking on the login Button");
         header.openLoginMenu();
@@ -49,6 +52,7 @@ public class LandingPage extends BasePage{
         return new LoginPage(driver);
     }
 
+    @Step("Filling search bar with query")
     public void search (String query){
 
         LOGGER.debug("Filling search bar with query");
@@ -57,6 +61,7 @@ public class LandingPage extends BasePage{
 
     }
 
+    @Step("Sending query request by clicking on the search button")
     public ResultPage sendSearchRequest(){
 
         LOGGER.debug("Sending query request by clicking on the search button");
@@ -67,6 +72,7 @@ public class LandingPage extends BasePage{
         return new ResultPage(driver);
     }
 
+    @Step("Opening Movies Menu of Header")
     public void openingHeaderMovieMenu(){
 
         LOGGER.debug("Opening Movies Menu of Header");
@@ -76,6 +82,7 @@ public class LandingPage extends BasePage{
 
     }
 
+    @Step("Clicking on the top rated option of Movies")
     public ResultPage openingTopRatedMovies(){
         LOGGER.debug("Clicking on the top rated option of Movies");
         header.openTopRatedMovies();
@@ -85,11 +92,11 @@ public class LandingPage extends BasePage{
         return new ResultPage(driver);
     }
 
+    @Step("Waiting for the options of movie navbar to appear")
     public void waitExplicitNumberOfElementsMoreThanOne(){
 
         LOGGER.debug("Waiting for the options of movie navbar to appear");
-//        List<WebElement> listMovieOptions = driver.findElements(movieOptionsMenu);
-        //explicit
+
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(movieOptionsMenu, 1));
         LOGGER.debug("finished waiting for the options of movie navbar to appear");

@@ -23,11 +23,11 @@ public class CommonSteps {
         SimpleDateFormat sdformat = new SimpleDateFormat("MMM dd, yyyy");
         Date d1 = sdformat.parse(firstDate);
         Date d2 = sdformat.parse(secondDate);
-        System.out.println("The date 1 is: " + sdformat.format(d1));
-        System.out.println("The date 2 is: " + sdformat.format(d2));
+//        System.out.println("The date 1 is: " + sdformat.format(d1));
+//        System.out.println("The date 2 is: " + sdformat.format(d2));
         if(d1.compareTo(d2) < 0) {
             orderOfDates = true;
-            System.out.println("Date 1 occurs before Date 2");
+//            System.out.println("Date 1 occurs before Date 2");
         }
 
         return orderOfDates;

@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -23,6 +24,7 @@ public class PersonPage extends BasePage {
     }
 
 
+    @Step("Sending the Title of the Movie from the Time Line")
     public String getTextOfMovieFromTimeLine (){
         LOGGER.debug("Sending the Title of the Movie from the Time Line");
         return movieInTimeline.getText();

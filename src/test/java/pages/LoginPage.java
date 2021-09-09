@@ -1,6 +1,7 @@
 package pages;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,6 +41,7 @@ public class LoginPage extends BasePage {
     }
 
 
+    @Step
     public void fillUserName(String username) {
         LOGGER.debug("Start filling username TextBox");
         usernameWebEle.sendKeys(username);
@@ -47,47 +49,60 @@ public class LoginPage extends BasePage {
 
     }
 
+    @Step
     public void fillPassword(String password) {
         LOGGER.debug("Filling password TextBox");
         passwordWebEle.sendKeys(password);
         LOGGER.debug("Finish filling password TextBox");
     }
 
+    @Step("Clicking login and now going to account detail")
     public AccountPage loggingIn(){
+        LOGGER.debug("Clicking login and now going to account detail");
         loginButtonWebEle.click();
         return new AccountPage(driver);
     }
+    @Step("Waiting for the error status to appear ")
     public void waitPresenceOfErrorStatusCardBy(){
+
+        LOGGER.debug("Waiting for the error status to appear ");
         //explicit
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.presenceOfElementLocated(errorStatusCardBy));
+        LOGGER.debug("Finished waiting for the error status to appear ");
 
     }
 
+    @Step("Getting error status text ")
     public String getErrorStatusText (){
+        LOGGER.debug("Getting error status text ");
         return errorStatusWebEle.getText();
     }
 
+    @Step("Getting the messages from the error status")
     private String [] messagesInError (){
+        LOGGER.debug("Getting the messages from the error status");
         List <WebElement> messagesList = driver.findElements(errorMessagesBy);
 
         String [] messagesToReturn = new String[2];
         messagesToReturn[0] = messagesList.get(0).getText();
         messagesToReturn[1] = messagesList.get(1).getText();
-
-
-//        System.out.println(messagesToReturn[1]);
+        LOGGER.debug("Finished getting the messages from the error status");
         return messagesToReturn;
 
     }
 
+    @Step("Giving the first message from the error status")
     public String firstErrorMessage (){
+        LOGGER.debug("Giving the first message from the error status");
         String [] containerMessages = messagesInError();
 
         return containerMessages[0];
     }
 
+    @Step("Giving the second message from the error status")
     public String secondErrorMessage (){
+        LOGGER.debug("Giving the second message from the error status");
         String [] containerMessages = messagesInError();
         return containerMessages[1];
     }
